@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-accent="cyan">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Suraj Gholap | Data Analyst & Master Data Governance Specialist</title>
+  <meta name="description" content="Portfolio of Suraj Gholap - Data Analyst experienced in enterprise data quality, SAP S/4HANA & MDG migration, Power BI, Python, and SQL.">
+  <meta name="keywords" content="Suraj Gholap, Data Analyst, Master Data Management, Power BI, SAP S/4HANA, Python, SQL, Tableau">
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            accent: 'var(--accent)',
+            'accent-light': 'var(--accent-light)',
+            primary: 'var(--text-primary)',
+            secondary: 'var(--text-secondary)',
+            muted: 'var(--text-muted)',
+            card: 'var(--card-bg)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="selection:bg-cyan-500/30 selection:text-cyan-200">
+
+  <!-- Interactive Canvas Particle Background -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- Ambient Glowing Blobs -->
+  <div class="ambient-glow ambient-glow-1"></div>
+  <div class="ambient-glow ambient-glow-2"></div>
+
+  <!-- ==========================================================================
+       Fixed Floating Navigation
+       ========================================================================== -->
+  <header class="fixed top-0 left-0 w-full z-50 glass-nav transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo with Profile Photo -->
+      <a href="#hero" class="flex items-center gap-3 group">
+        <div class="relative">
+          <img src="assets/profile.jpg" alt="Suraj Gholap" class="w-10 h-10 rounded-xl object-cover object-top ring-2 ring-accent/40 shadow-md group-hover:scale-105 transition-transform" />
+          <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-500 border-2 border-[#080c14]"></span>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-extrabold text-lg tracking-tight group-hover:text-accent-light transition-colors bind-name">Suraj Gholap</span>
+          <span class="text-[10px] font-mono tracking-widest uppercase text-muted">Data Admin • SAP MDM & Vendor Governance</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-secondary">
+        <a href="#about" class="hover:text-primary transition-colors">About</a>
+        <a href="#skills" class="hover:text-primary transition-colors">Skills</a>
+        <a href="#certifications" class="hover:text-primary transition-colors">Certifications</a>
+        <a href="#projects" class="hover:text-primary transition-colors">Projects</a>
+        <a href="#experience" class="hover:text-primary transition-colors">Experience</a>
+        <a href="#contact" class="hover:text-primary transition-colors">Contact</a>
+      </nav>
+
+      <!-- Utility Controls: SFX, Themes & Accent Picker -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        
+        <!-- Accent Color Swatches (Dropdown / Quick Picker) -->
+        <div class="relative group hidden sm:flex items-center gap-1.5 p-1 rounded-full bg-white/5 border border-white/10" title="Change Accent Color">
+          <button class="w-4 h-4 rounded-full bg-cyan-400 hover:scale-110 transition-transform" data-set-accent="cyan" aria-label="Cyan Accent"></button>
+          <button class="w-4 h-4 rounded-full bg-emerald-400 hover:scale-110 transition-transform" data-set-accent="emerald" aria-label="Emerald Accent"></button>
+          <button class="w-4 h-4 rounded-full bg-violet-400 hover:scale-110 transition-transform" data-set-accent="violet" aria-label="Violet Accent"></button>
+          <button class="w-4 h-4 rounded-full bg-rose-400 hover:scale-110 transition-transform" data-set-accent="rose" aria-label="Rose Accent"></button>
+        </div>
+
+        <!-- Sound SFX Toggle -->
+        <button id="sound-toggle-btn" class="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition-colors" title="Toggle Sound FX" aria-label="Toggle Sound FX">
+          <i data-lucide="volume-x" class="w-5 h-5 text-muted"></i>
+        </button>
+
+        <!-- Dark/Light Mode Toggle -->
+        <button id="theme-toggle-btn" class="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition-colors" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
+          <span id="theme-icon">
+            <i data-lucide="sun" class="w-5 h-5"></i>
+          </span>
+        </button>
+
+        <!-- Resume Modal Trigger Button -->
+        <button id="btn-open-resume" class="hidden sm:inline-flex btn-secondary !py-2 !px-4 text-xs font-semibold">
+          <i data-lucide="file-text" class="w-4 h-4 text-accent"></i> Resume
+        </button>
+
+        <!-- Mobile Menu Toggle -->
+        <button id="mobile-menu-btn" class="md:hidden p-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition-colors" aria-label="Open Navigation Menu">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div id="mobile-drawer" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-xl hidden opacity-0 transition-opacity duration-300 md:hidden flex flex-col justify-between p-8">
+    <div class="flex justify-between items-center pb-6 border-b border-white/10">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-accent flex items-center justify-center text-white">
+          <i data-lucide="terminal" class="w-4 h-4"></i>
+        </div>
+        <span class="font-bold text-lg bind-name">Suraj Gholap</span>
+      </div>
+      <button id="close-mobile-drawer" class="p-2 rounded-lg bg-white/10 text-white" aria-label="Close Menu">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+    </div>
+
+    <nav class="flex flex-col gap-5 text-lg font-semibold my-auto">
+      <a href="#about" class="mobile-nav-link hover:text-accent transition-colors">01. About</a>
+      <a href="#skills" class="mobile-nav-link hover:text-accent transition-colors">02. Skills</a>
+      <a href="#certifications" class="mobile-nav-link hover:text-accent transition-colors">03. Certifications</a>
+      <a href="#projects" class="mobile-nav-link hover:text-accent transition-colors">04. Projects</a>
+      <a href="#experience" class="mobile-nav-link hover:text-accent transition-colors">05. Experience</a>
+      <a href="#testimonials" class="mobile-nav-link hover:text-accent transition-colors">06. Testimonials</a>
+      <a href="#contact" class="mobile-nav-link hover:text-accent transition-colors">07. Contact</a>
+    </nav>
+
+    <div class="pt-6 border-t border-white/10 flex flex-col gap-4">
+      <div class="flex items-center justify-between">
+        <span class="text-sm text-secondary">Accent Color:</span>
+        <div class="flex gap-2">
+          <button class="w-6 h-6 rounded-full bg-cyan-400" data-set-accent="cyan"></button>
+          <button class="w-6 h-6 rounded-full bg-emerald-400" data-set-accent="emerald"></button>
+          <button class="w-6 h-6 rounded-full bg-violet-400" data-set-accent="violet"></button>
+          <button class="w-6 h-6 rounded-full bg-rose-400" data-set-accent="rose"></button>
+        </div>
+      </div>
+      <button class="btn-primary w-full justify-center" onclick="document.getElementById('btn-open-resume').click()">
+        <i data-lucide="file-text" class="w-4 h-4"></i> View Resume
+      </button>
+    </div>
+  </div>
+
+  <main class="relative z-10 pt-20">
+
+    <!-- ==========================================================================
+         HERO SECTION
+         ========================================================================== -->
+    <section id="hero" class="min-h-[calc(100vh-5rem)] flex items-center justify-center py-16 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        
+        <!-- Left Hero Content -->
+        <div class="lg:col-span-7 flex flex-col items-start text-left">
+          
+          <!-- Organization & Client Badge -->
+          <div class="flex flex-wrap items-center gap-2 mb-6">
+            <div class="status-indicator">
+              <span class="status-dot"></span>
+              <span id="bind-status">LanceSoft • Client: British Petroleum (BP)</span>
+            </div>
+            <span class="px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-accent-light">
+              SAP MDG • Fiori • Ariba • Excel
+            </span>
+          </div>
+
+          <!-- Main Title -->
+          <h1 class="text-4xl sm:text-5xl xl:text-6xl font-extrabold tracking-tight leading-[1.15] mb-6">
+            Master Data Management, <br/>
+            Vendor Governance & <br/>
+            <span class="text-gradient">Data Analytics.</span>
+          </h1>
+
+          <!-- Dynamic Role Typewriter Subtitle -->
+          <div class="h-10 sm:h-12 flex items-center text-xl sm:text-2xl font-mono text-secondary mb-6">
+            <span class="text-accent mr-2">></span>
+            <span id="typewriter-text" class="text-primary font-semibold"></span>
+            <span class="typewriter-cursor"></span>
+          </div>
+
+          <!-- Bio Tagline -->
+          <p id="bind-tagline" class="text-base sm:text-lg text-secondary max-w-xl leading-relaxed mb-8">
+            Crafting immersive digital experiences through code, design, and interactive storytelling.
+          </p>
+
+          <!-- Action Buttons -->
+          <div class="flex flex-wrap items-center gap-4 mb-10">
+            <a href="#projects" class="btn-primary">
+              <span>Explore Projects</span>
+              <i data-lucide="arrow-down-right" class="w-4 h-4"></i>
+            </a>
+            <a href="#contact" class="btn-secondary">
+              <span>Let's Talk</span>
+              <i data-lucide="mail" class="w-4 h-4 text-accent"></i>
+            </a>
+            <button class="btn-secondary sm:hidden" onclick="document.getElementById('btn-open-resume').click()">
+              <i data-lucide="file-text" class="w-4 h-4 text-accent"></i> Resume
+            </button>
+          </div>
+
+          <!-- Quick Location & Social Strip -->
+          <div class="flex flex-wrap items-center gap-4 sm:gap-6 text-sm text-secondary pt-6 border-t border-white/10 w-full max-w-xl">
+            <div class="flex items-center gap-2">
+              <i data-lucide="map-pin" class="w-4 h-4 text-accent"></i>
+              <span id="bind-location">Pune, India</span>
+            </div>
+            <a href="tel:+919373780875" class="flex items-center gap-2 hover:text-accent transition-colors">
+              <i data-lucide="phone" class="w-4 h-4 text-accent"></i>
+              <span class="bind-phone font-mono text-xs sm:text-sm">+91-9373780875</span>
+            </a>
+            <div class="flex items-center gap-3 sm:ml-auto">
+              <a id="bind-github" href="#" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-white/5 hover:bg-white/15 text-secondary hover:text-white transition-colors" title="GitHub">
+                <i data-lucide="github" class="w-4 h-4"></i>
+              </a>
+              <a id="bind-linkedin" href="#" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-white/5 hover:bg-white/15 text-secondary hover:text-white transition-colors" title="LinkedIn">
+                <i data-lucide="linkedin" class="w-4 h-4"></i>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Hero Interactive 3D Holographic Card -->
+        <div class="lg:col-span-5 flex justify-center lg:justify-end">
+          <div class="tilt-card w-full max-w-md glass-panel p-6 sm:p-8 rounded-3xl relative overflow-hidden shadow-2xl">
+            
+            <!-- Glow Accent at top-right corner -->
+            <div class="absolute -top-12 -right-12 w-40 h-40 bg-accent/25 rounded-full blur-2xl pointer-events-none"></div>
+
+            <div class="tilt-inner space-y-5">
+              
+              <!-- Profile Portrait Header -->
+              <div class="flex items-center gap-4 pb-4 border-b border-white/10">
+                <div class="relative shrink-0">
+                  <img src="assets/profile.jpg" alt="Suraj Gholap" class="w-20 h-24 sm:w-24 sm:h-28 rounded-2xl object-cover object-top ring-2 ring-accent/40 shadow-xl" />
+                  <span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-[#080c14]" title="Active"></span>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-accent/15 border border-accent/25 text-[10px] font-mono text-accent mb-1">
+                    <i data-lucide="shield-check" class="w-3 h-3"></i> Verified Profile
+                  </div>
+                  <h3 class="text-base sm:text-lg font-bold text-primary truncate">Suraj Gholap</h3>
+                  <p class="text-xs text-secondary truncate">LanceSoft • Client: BP</p>
+                  <div class="flex items-center gap-1.5 mt-2 text-[11px] font-mono text-emerald-400">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span>Data Cleansing Coordinator</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Terminal Header -->
+              <div class="flex items-center justify-between pb-2 border-b border-white/5">
+                <div class="flex items-center gap-2">
+                  <div class="w-2.5 h-2.5 rounded-full bg-rose-500"></div>
+                  <div class="w-2.5 h-2.5 rounded-full bg-amber-500"></div>
+                  <div class="w-2.5 h-2.5 rounded-full bg-emerald-500"></div>
+                </div>
+                <span class="text-[11px] font-mono text-muted">specialist.config.ts</span>
+                <i data-lucide="database" class="w-3.5 h-3.5 text-accent"></i>
+              </div>
+
+              <!-- Code Preview / Visual Identity Block -->
+              <div class="font-mono text-xs sm:text-sm space-y-1.5 text-secondary">
+                <p><span class="text-rose-400">const</span> dataSpecialist = {</p>
+                <p class="pl-4">name: <span class="text-emerald-400">'Suraj Gholap'</span>,</p>
+                <p class="pl-4">employer: <span class="text-cyan-400">'LanceSoft'</span>,</p>
+                <p class="pl-4">client: <span class="text-amber-400">'British Petroleum (BP)'</span>,</p>
+                <p class="pl-4">coreDomains: [</p>
+                <p class="pl-8 text-cyan-300">'Data Administrator',</p>
+                <p class="pl-8 text-cyan-300">'Master Data Management (MDM)',</p>
+                <p class="pl-8 text-cyan-300">'Vendor Data Governance'</p>
+                <p class="pl-4">],</p>
+                <p class="pl-4">sapEcosystem: [</p>
+                <p class="pl-8 text-emerald-300">'SAP MDG', 'SAP Fiori',</p>
+                <p class="pl-8 text-emerald-300">'SAP S/4HANA', 'Ariba Admin'</p>
+                <p class="pl-4">],</p>
+                <p class="pl-4">analytics: <span class="text-amber-300">'Advanced Excel & Power BI'</span>,</p>
+                <p class="pl-4">vendorRecords: <span class="text-emerald-400">'4,500+ Governed'</span>,</p>
+                <p class="pl-4">cutoverAccuracy: <span class="text-emerald-400">'98%+'</span></p>
+                <p>};</p>
+              </div>
+
+              <!-- Interactive Live System Stats -->
+              <div class="p-4 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between">
+                <div>
+                  <div class="text-[10px] font-mono text-muted uppercase">Interactive Mode</div>
+                  <div class="text-xs font-bold text-accent">Physics & Canvas Active</div>
+                </div>
+                <button class="px-3 py-1 text-xs font-mono rounded-lg bg-accent/15 text-accent border border-accent/20 hover:bg-accent hover:text-white transition-colors" onclick="window.soundFX.playToggle()">
+                  Ping ⚡
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Scroll Mouse Indicator -->
+      <a href="#about" class="absolute bottom-6 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-muted hover:text-accent transition-colors" aria-label="Scroll Down">
+        <div class="scroll-indicator"></div>
+      </a>
+    </section>
+
+    <!-- ==========================================================================
+         ABOUT SECTION & STATS
+         ========================================================================== -->
+    <section id="about" class="py-24 px-4 sm:px-6 lg:px-8 border-t border-white/5">
+      <div class="max-w-7xl mx-auto">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <div class="hero-badge">
+            <i data-lucide="user" class="w-3.5 h-3.5"></i>
+            <span>01. Profile & Impact</span>
+          </div>
+          <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-4">
+            Engineering with passion. <br/>
+            Designing with <span class="text-gradient">precision.</span>
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <!-- Bio Narrative with Portrait -->
+          <div class="lg:col-span-7 glass-panel p-8 sm:p-10 rounded-3xl reveal-fade-up">
+            <div class="flex flex-col sm:flex-row gap-6 items-start mb-4">
+              <div class="relative shrink-0 mx-auto sm:mx-0">
+                <img src="assets/profile.jpg" alt="Suraj Gholap" class="w-32 sm:w-36 aspect-[3/4] rounded-2xl object-cover object-top ring-2 ring-accent/40 shadow-2xl" />
+                <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-accent text-white shadow-md whitespace-nowrap">
+                  Suraj Gholap
+                </span>
+              </div>
+              <div id="bind-bio-container" class="flex-1">
+                <!-- Rendered via JavaScript -->
+              </div>
+            </div>
+
+            <div class="flex flex-wrap gap-2.5 mt-8 pt-6 border-t border-white/10">
+              <span class="px-3.5 py-1.5 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-accent-light">
+                🏢 LanceSoft (Client: British Petroleum)
+              </span>
+              <span class="px-3.5 py-1.5 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-secondary">
+                📦 SAP MDG, Fiori & S/4HANA
+              </span>
+              <span class="px-3.5 py-1.5 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-secondary">
+                🛒 SAP Ariba Administration
+              </span>
+              <span class="px-3.5 py-1.5 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-secondary">
+                📑 Advanced Excel (VBA, Macros, Formulas)
+              </span>
+              <span class="px-3.5 py-1.5 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-secondary">
+                🛡️ Sensitive Vendor Banking Controls
+              </span>
+              <span class="px-3.5 py-1.5 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-secondary">
+                📊 Power BI & Tableau KPI Analytics
+              </span>
+            </div>
+          </div>
+
+          <!-- Dynamic Live Stats Grid -->
+          <div class="lg:col-span-5 grid grid-cols-2 gap-4 reveal-fade-up delay-200" id="bind-stats-grid">
+            <!-- Rendered via JavaScript -->
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SKILLS MATRIX SECTION
+         ========================================================================== -->
+    <section id="skills" class="py-24 px-4 sm:px-6 lg:px-8 bg-black/20 border-t border-white/5">
+      <div class="max-w-7xl mx-auto">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <div class="hero-badge">
+            <i data-lucide="cpu" class="w-3.5 h-3.5"></i>
+            <span>02. Technical Arsenal</span>
+          </div>
+          <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-4">
+            Mastery across the <span class="text-gradient">modern stack.</span>
+          </h2>
+          <p class="text-secondary text-base sm:text-lg">
+            Battle-tested frameworks, languages, and tools selected for performance, maintainability, and exceptional developer ergonomics.
+          </p>
+        </div>
+
+        <!-- Skills Category Columns -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="skills-container">
+          <!-- Rendered via JavaScript -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         CERTIFICATIONS & CREDENTIALS SECTION
+         ========================================================================== -->
+    <section id="certifications" class="py-20 px-4 sm:px-6 lg:px-8 border-t border-white/5">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <div class="hero-badge">
+            <i data-lucide="award" class="w-3.5 h-3.5"></i>
+            <span>03. Industry Certifications</span>
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-2">
+            Verified <span class="text-gradient">Credentials.</span>
+          </h2>
+          <p class="text-secondary text-sm sm:text-base">
+            Recognized industry accreditations in Cloud, Generative AI, and Automation.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="certifications-container">
+          <!-- Rendered via JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PROJECTS SHOWCASE SECTION
+         ========================================================================== -->
+    <section id="projects" class="py-24 px-4 sm:px-6 lg:px-8 bg-black/20 border-t border-white/5">
+      <div class="max-w-7xl mx-auto">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+          <div>
+            <div class="hero-badge">
+              <i data-lucide="folder-git-2" class="w-3.5 h-3.5"></i>
+              <span>04. Selected Works</span>
+            </div>
+            <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight">
+              Featured <span class="text-gradient">Projects.</span>
+            </h2>
+          </div>
+
+          <!-- Category Filter Pills -->
+          <div class="flex flex-wrap gap-2">
+            <button class="filter-pill active" data-filter="all">All</button>
+            <button class="filter-pill" data-filter="sap">SAP MDG & Vendor Data</button>
+            <button class="filter-pill" data-filter="analytics">Data Analysis & Excel</button>
+            <button class="filter-pill" data-filter="ai">AI & ML</button>
+          </div>
+        </div>
+
+        <!-- Projects Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
+          <!-- Rendered via JavaScript -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         EXPERIENCE & EDUCATION TIMELINE
+         ========================================================================== -->
+    <section id="experience" class="py-24 px-4 sm:px-6 lg:px-8 bg-black/20 border-t border-white/5">
+      <div class="max-w-5xl mx-auto">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <div class="hero-badge">
+            <i data-lucide="briefcase" class="w-3.5 h-3.5"></i>
+            <span>04. Track Record</span>
+          </div>
+          <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-4">
+            Professional <span class="text-gradient">Journey.</span>
+          </h2>
+          <p class="text-secondary text-base sm:text-lg">
+            Proven history of delivering high-impact software across fast-paced tech startups and digital agencies.
+          </p>
+        </div>
+
+        <!-- Vertical Timeline Tree -->
+        <div class="relative" id="experience-timeline">
+          <div class="timeline-stem"></div>
+          <!-- Rendered via JavaScript -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         TESTIMONIALS SECTION
+         ========================================================================== -->
+    <section id="testimonials" class="py-24 px-4 sm:px-6 lg:px-8 border-t border-white/5">
+      <div class="max-w-7xl mx-auto">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <div class="hero-badge">
+            <i data-lucide="message-square" class="w-3.5 h-3.5"></i>
+            <span>05. Social Proof</span>
+          </div>
+          <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-4">
+            What leaders <span class="text-gradient">say.</span>
+          </h2>
+        </div>
+
+        <!-- Testimonial Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="testimonials-grid">
+          <!-- Rendered via JavaScript -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         CONTACT SECTION
+         ========================================================================== -->
+    <section id="contact" class="py-24 px-4 sm:px-6 lg:px-8 bg-black/20 border-t border-white/5">
+      <div class="max-w-7xl mx-auto">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          
+          <!-- Contact Narrative & Details -->
+          <div class="lg:col-span-5 space-y-8">
+            <div>
+              <div class="hero-badge">
+                <i data-lucide="send" class="w-3.5 h-3.5"></i>
+                <span>06. Get In Touch</span>
+              </div>
+              <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-4">
+                Let's make something <br/>
+                <span class="text-gradient">extraordinary.</span>
+              </h2>
+              <p class="text-secondary text-base sm:text-lg leading-relaxed">
+                Whether you have an upcoming project, want to discuss a full-time role, or simply want to chat about creative code, my inbox is always open.
+              </p>
+            </div>
+
+            <!-- Direct Email Copy Card -->
+            <div class="glass-panel p-6 rounded-2xl flex items-center justify-between gap-4">
+              <div class="flex items-center gap-3 overflow-hidden">
+                <div class="w-10 h-10 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent shrink-0">
+                  <i data-lucide="mail" class="w-5 h-5"></i>
+                </div>
+                <div class="truncate">
+                  <div class="text-xs text-muted font-mono uppercase">Direct Email</div>
+                  <a href="mailto:suraj.m.gholap@gmail.com" class="text-sm sm:text-base font-semibold text-primary hover:text-accent transition-colors truncate bind-email">suraj.m.gholap@gmail.com</a>
+                </div>
+              </div>
+              <button id="btn-copy-email" class="btn-secondary !py-2 !px-3 shrink-0 text-xs" title="Copy Email">
+                <i data-lucide="copy" class="w-4 h-4"></i>
+              </button>
+            </div>
+
+            <!-- Direct Phone & WhatsApp Card -->
+            <div class="glass-panel p-6 rounded-2xl flex items-center justify-between gap-4">
+              <div class="flex items-center gap-3 overflow-hidden">
+                <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
+                  <i data-lucide="phone-call" class="w-5 h-5"></i>
+                </div>
+                <div class="truncate">
+                  <div class="text-xs text-muted font-mono uppercase">Direct Phone / Mobile</div>
+                  <a href="tel:+919373780875" class="text-sm sm:text-base font-semibold text-primary hover:text-emerald-400 transition-colors bind-phone font-mono">+91-9373780875</a>
+                </div>
+              </div>
+              <a href="https://wa.me/919373780875" target="_blank" rel="noopener noreferrer" class="btn-secondary !py-2 !px-3 shrink-0 text-xs hover:border-emerald-500" title="Chat on WhatsApp">
+                <i data-lucide="message-circle" class="w-4 h-4 text-emerald-400"></i>
+              </a>
+            </div>
+
+            <!-- Fast Response Promise -->
+            <div class="flex items-center gap-3 text-xs font-mono text-secondary">
+              <div class="w-2 h-2 rounded-full bg-emerald-400"></div>
+              <span>Average response time: &lt; 24 hours</span>
+            </div>
+          </div>
+
+          <!-- Contact Form Panel -->
+          <div class="lg:col-span-7 glass-panel p-8 sm:p-10 rounded-3xl shadow-xl">
+            <h3 class="text-xl font-bold text-primary mb-6">Send a Direct Transmission</h3>
+
+            <form id="contact-form" class="space-y-6">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div>
+                  <label for="form-name" class="block text-xs font-mono uppercase text-secondary mb-2">Your Name *</label>
+                  <input type="text" id="form-name" required placeholder="e.g. John Doe" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-primary focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent transition-all text-sm">
+                </div>
+                <div>
+                  <label for="form-email" class="block text-xs font-mono uppercase text-secondary mb-2">Email Address *</label>
+                  <input type="email" id="form-email" required placeholder="e.g. john@example.com" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-primary focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent transition-all text-sm">
+                </div>
+              </div>
+
+              <div>
+                <label for="form-subject" class="block text-xs font-mono uppercase text-secondary mb-2">Subject / Inquiry Type</label>
+                <input type="text" id="form-subject" placeholder="e.g. New Project Inquiry / Full-time Opportunity" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-primary focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent transition-all text-sm">
+              </div>
+
+              <div>
+                <label for="form-message" class="block text-xs font-mono uppercase text-secondary mb-2">Project Details / Message *</label>
+                <textarea id="form-message" rows="4" required placeholder="Tell me about your project, timeline, budget, or ideas..." class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-primary focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent transition-all text-sm resize-none"></textarea>
+              </div>
+
+              <button type="submit" id="contact-submit-btn" class="btn-primary w-full justify-center">
+                <i data-lucide="send" class="w-4 h-4"></i>
+                <span>Transmit Message</span>
+              </button>
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="border-t border-white/10 py-12 px-4 sm:px-6 lg:px-8 relative z-10 bg-black/40">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+      
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-accent flex items-center justify-center text-white">
+          <i data-lucide="code" class="w-4 h-4"></i>
+        </div>
+        <span class="text-sm font-medium text-secondary">
+          Crafted with passion for <span class="bind-name text-primary font-bold">Suraj Gholap</span>
+        </span>
+      </div>
+
+      <div class="flex items-center gap-6 text-sm text-secondary">
+        <a href="#hero" class="hover:text-accent transition-colors flex items-center gap-1">
+          Back to Top <i data-lucide="arrow-up" class="w-3.5 h-3.5"></i>
+        </a>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       MODAL: PROJECT CASE STUDY
+       ========================================================================== -->
+  <div id="project-modal" class="modal-overlay" aria-hidden="true" role="dialog">
+    <div class="modal-box relative">
+      <button id="close-project-modal" class="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-black/90 transition-colors" aria-label="Close Modal">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+      <div id="project-modal-body">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL: PRINTABLE / DOWNLOADABLE RESUME
+       ========================================================================== -->
+  <div id="resume-modal" class="modal-overlay" aria-hidden="true" role="dialog">
+    <div class="modal-box max-w-3xl relative">
+      <div class="flex items-center justify-between p-4 border-b border-white/10 bg-white/5">
+        <div class="flex items-center gap-2">
+          <i data-lucide="file-text" class="w-5 h-5 text-accent"></i>
+          <span class="font-bold text-sm">Resume Preview</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <button id="btn-print-resume" class="btn-primary !py-1.5 !px-3 text-xs">
+            <i data-lucide="printer" class="w-3.5 h-3.5"></i> Print / Save PDF
+          </button>
+          <button id="close-resume-modal" class="p-1.5 rounded-lg bg-white/10 text-white hover:bg-white/20" aria-label="Close Resume">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Printable resume container -->
+      <div id="resume-printable" class="p-8 sm:p-12 bg-white text-gray-900 shadow-inner rounded-b-2xl">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container"></div>
+
+  <!-- Application Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/particles.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>
